@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.SortedSet;
 
+import android.net.Uri;
 
 public class CameraModule extends ReactContextBaseJavaModule {
   private static final String TAG = "CameraModule";
@@ -278,6 +279,28 @@ public class CameraModule extends ReactContextBaseJavaModule {
           }
       }
     });
+  }
+
+  @ReactMethod
+  public void clearPicture(String filePath) {
+    Log.d("react-native-camera", "clearPicture");
+    try {
+      File imageFile = new File(filePath.replace("file://", ""));
+      Boolean delF = imageFile.delete();
+
+      Log.d("react-native-camera", "clearPicture.delete");
+      Log.d("react-native-camera", filePath);
+      if (delF) {
+        Log.d("react-native-camera", "clearPicture.deleteImage Ok");
+      }
+      else {
+        Log.d("react-native-camera", "clearPicture.deleteImage N");
+      }
+    }
+    catch (Exception e) {
+      Log.d("react-native-camera", "clearPicture.Exception");
+      Log.d("react-native-camera", e.getMessage());
+    }
   }
 
   @ReactMethod

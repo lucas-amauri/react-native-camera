@@ -514,6 +514,10 @@ export default class Camera extends React.Component<PropsType, StateType> {
     };
   }
 
+  async clearPicture(filePath) {
+    return await CameraManager.clearPicture(filePath);
+  } 
+
   async takePictureAsync(options?: PictureOptions) {
     if (!options) {
       options = {};
